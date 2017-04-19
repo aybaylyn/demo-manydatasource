@@ -37,7 +37,7 @@
         <property name="maxIdle" value="5"/>
     </bean>
 
-
+    <!-- 动态数据库配置-->
     <bean id="dynamicDataSource" class="com.may.demo.danamicdatasource.DynamicDataSource">
         <property name="targetDataSources">
             <map key-type="java.lang.String">
@@ -49,22 +49,20 @@
     </bean>
 
 
-   <!-- 动态数据源切换aop 先与事务的aop -->
+    <!-- 动态数据源切换aop 先与事务的aop -->
 
     <bean id="dataSourceInterceptor" class="com.may.demo.danamicdatasource.DataSourceInterceptor"/>
     <aop:config>
         <aop:pointcut id="default"
-                      expression="execution(* com.may.demo.service.*.*(..))" />
+                      expression="execution(* com.may.demo.service.*.*(..))"/>
         <aop:pointcut id="ds2" expression="execution(* com.may.demo.service.ds2..*.*(..))"/>
         <aop:pointcut id="ds1" expression="execution(* com.may.demo.service.ds1..*.*(..))"/>
         <aop:aspect id="dataSourceAspect" ref="dataSourceInterceptor">
-            <aop:before pointcut-ref="default" method="setdataSource1" />
+            <aop:before pointcut-ref="default" method="setdataSource1"/>
             <aop:before pointcut-ref="ds2" method="setdataSource2"/>
             <aop:before pointcut-ref="ds1" method="setdataSource1"/>
         </aop:aspect>
     </aop:config>
-
-
 
 
     <!-- sqlSessionFactory -->

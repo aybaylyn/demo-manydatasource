@@ -1,9 +1,6 @@
 package com.may.demo.danamicdatasource;
 
 import com.may.demo.util.Constants;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by May on 4/18/17.
